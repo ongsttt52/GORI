@@ -1,0 +1,312 @@
+@charset "UTF-8";
+
+	/* 스타일 돌려쓰기 */
+	.alertMsg {
+		display:none;
+      	width: 300px;
+      	padding-left: 15px;
+      	border-radius: 5px;
+      	font-size:15px;
+      	font-weight: 300;
+      	line-height: 50px;
+      	text-align: left;
+    }
+    .button-option {
+    	height: 30px;
+    	padding: 3px 5px;
+    	border-radius: 30px;
+    	background-color: var(--button-color);
+    	font-size: 13px;
+    }
+    .button-option:hover {
+    	border: 2px solid white;
+    	background-color: var(--button-hover-color);
+    	transition-duration: 0.1s;
+    }
+    .button-selected {
+    	border: 2px solid white;
+    	background-color: var(--button-hover-color);
+    }
+    .dropdown-div {
+		display: none;
+		position: absolute;
+		width: 150px;
+		border-radius: 3px;
+		background-color: var(--button-color);
+		text-align: center;
+		font-size: 13px;
+		z-index: 1000;
+	}
+	.dropdown-div button {
+		display: block;
+		width: 100%;
+		height: 40px;
+		padding: 10px 5px;
+	}
+	.dropdown-div button:hover {
+		background-color: var(--button-hover-color);
+	}
+	.emptyResult {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+	}
+	.emptyResult>span{
+		position: absolute;
+		top: 50%;
+		left: calc(50% - 55px);
+	}
+	.imgPreview {
+		width: 50px;
+		height: 50px;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+	.notValid {
+		border:1px solid red !important;
+	    outline:1px solid #ff000081 !important;
+	}
+	.notValidMsg {
+		display:none;
+		color:red;
+	}
+	.pageDiv {
+		display: flex;
+		gap: 20px;
+		min-width: 50px;
+		margin: 0 auto;
+	}
+	.pageButton {
+		width: 20px;
+		height: 20px;
+		padding: 5px;
+		border: 1px solid var(--button-hover-color);
+	}
+	.pageButton-selected {
+		background-color: var(--button-color);
+	}
+	
+	/* 박스 돌려쓰기 */
+	.artistPreview, .albumPreview, .musicPreview, .playlistPreview {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		position: relative;
+		width: 100%;
+		height: 60px;
+		padding: 10px;
+		overflow: visible !important;
+	}
+	.musicPreview>div:first-of-type {
+		display: flex;
+		flex-direction: column;
+		align-items: start;
+		flex-grow: 1;
+	}
+	.musicPreview>div:last-of-type {
+		position: relative;
+		width: 30px;
+		height: 60px;
+	}
+	.artistPreview:hover, .albumPreview:hover, .musicPreview:hover, .playlistPreview:hover {
+		background-color: var(--content-hover-color);
+		cursor: pointer;
+	}
+	.artistDiv, .albumDiv, .musicDiv, .playlistDiv {
+		display: flex;
+		flex-direction: column;
+		justify-content: start;
+		align-items: start;
+		gap:7px;
+		position: relative;
+		width: 160px;
+		max-height: 300px;
+		padding: 10px;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+	.artistDiv img, .albumDiv img, .musicDiv img, .playlistDiv img {
+		width: 140px;
+		aspect-ratio: 1 / 1;
+		border-radius: 50%;
+	}
+	.albumDiv img, .musicDiv img, .playlistDiv img {
+		border-radius: 5px;
+	}
+	.albumDiv>div:first-of-type, .musicDiv>div:first-of-type {
+		position:relative;
+	}
+	.contentDiv-playButton {
+		display: none;
+		position: absolute;
+		right: 5%;
+		bottom: 5%;
+		border-radius: 50%;
+		background-color: black;
+		color: var(--point-color);
+		font-size: 45px;
+		z-index: 100;
+	}
+  	.div-selected {
+  		background-color: var(--content-hover-color);
+  	}
+	.artistDiv:hover, .albumDiv:hover, .musicDiv:hover, .playlistDiv:hover {
+		background-color: var(--content-hover-color);
+	}
+	.modal-body {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0,0,0,0.5);
+		z-index: 1000;
+	}
+	.modal-content {
+		width: 300px;
+		max-width: 80%;
+		height: 500px;
+		max-height: 80%;
+		padding: 20px;
+		border-radius: 5px;
+		background-color: var(--content-color);
+	}
+	.modal-closeButton {
+		float:right;
+		width: 30px;
+		height: 30px;
+		border-radius: 5px;
+		background-color: white;
+		color: black;
+	}
+	.modal-closeButton:hover {
+		transform: scale(1.1);
+	}
+	.messageDiv {
+		display:none;
+		position: fixed;
+		top: 80%;
+		left: calc(50% - 200px);
+		width: 400px;
+		height: 50px;
+		border-radius: 5px;
+		background-color: white;
+		color: black;
+		text-align: center;
+		line-height: 50px;
+		z-index: 1000;
+	}
+
+	/* 박스 돌려쓰기 2 */
+	
+	
+    /* 폼 요소 */
+    .inputSubmit {
+		width: 140px;
+	    height: 45px;
+	    border-radius: 50px;
+	    background-color: rgba(255,255,255);
+	    color: black;
+	    font-size: 18px;
+	    font-weight: 500;
+	    cursor: pointer;	
+	}
+	.inputSubmit:hover {
+		transform: scale(1.05);
+		transition-duration: 0.3s;
+	}
+	.inputText {
+		 width: 250px;
+         height: 50px;
+         margin: 5px 0;
+         padding: 10px;
+         border: 1px solid #7e7e7e;
+         border-radius: 3px;
+         font-size: 16px;
+	}
+	.searchInput {
+		background-color: transparent;
+		border:none;
+		border-radius: 10px;
+		outline:none;
+		width:100%;
+		height:50px;
+	}
+	.selectBox { 
+		background-color: var(--button-color);
+		cursor:pointer;
+	}
+	.checkBox {
+		width: 20px;
+		height: 20px;
+	}
+	
+	/* 텍스트 요소 */
+	.mainTitle {
+		font-size: 28px; 
+		font-weight: 500; 
+	}
+	.subTitle {
+		font-size: 20px;
+  		color: var(--text-color-middle);
+	}
+	.subTitle-selected {
+		color: white;
+	}
+	.subText {
+		color: var(--text-color-middle);
+		font-size: 14px;
+		font-weight: 400;
+	}
+	.text-overflow {
+		white-space: nowrap;      /* 텍스트를 한 줄로 처리 */
+   		overflow: hidden;         /* 넘치는 텍스트는 숨김 처리 */
+    	text-overflow: ellipsis;  /* 넘친 텍스트를 '...'으로 표시 */
+	}
+	.text-overflow-2 {
+		display: -webkit-box;             /* Flexbox와 유사한 박스 레이아웃을 사용 */
+	    -webkit-box-orient: vertical;     /* 세로 방향으로 정렬 */
+	    -webkit-line-clamp: 2;            /* 2줄까지만 표시 */
+	    overflow: hidden;                 
+	    text-overflow: ellipsis;          
+	    line-height: 1.2;                 
+	    max-height: calc(1.2em * 2);      /* 두 줄까지만 보이게 함 (줄 간격 * 줄 수) */
+	}
+  	.wordLength {
+  		color: var(--text-color-weak);
+  		font-size: 13px;
+  	}
+	
+	/* 웹 요소 */
+	.scroll {
+		overflow-y: scroll;		
+	}
+	.scroll::-webkit-scrollbar {
+		background-color: transparent;
+	    width: 13px;
+	}
+	.scroll::-webkit-scrollbar-thumb {
+	    background-color: var(--scroll-color);
+	}
+	.scroll::-webkit-scrollbar-thumb:hover {
+	    background-color: var(--scroll-hover-color);
+	}
+	
+	/* 상태 */
+	.displayNone {
+		display:none;
+	}
+	
+	.hidden {
+	    opacity: 0; /* 숨김 상태 */
+    	visibility: hidden; /* 숨김 상태 */
+    	pointer-events: none; /* 클릭 및 포인터 이벤트 무시 */
+	}
+	.hover-scale:hover {
+		transform: scale(1.2);
+		transition-duration: 0.2s;
+	}

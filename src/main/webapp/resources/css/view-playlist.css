@@ -1,0 +1,122 @@
+#playlistView-wrapper {
+    height: 500px;
+    padding: 20px;
+}
+#playlistView-top {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+#playlistView-top>img {
+    width: 200px;
+    height: 200px;
+}
+#playlistView-top>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 20px;
+}
+#playlistView-top>div>div:first-of-type {
+    display: flex;
+    flex-direction: column;
+}
+#playlistView-top>div>div:first-of-type span:nth-of-type(1) {
+    font-weight: 300;
+}
+#playlistView-top>div>div:first-of-type span:nth-of-type(2) {
+    display: block;
+    font-size: 40px;
+    font-weight: 800;
+}
+#playlistView-top>div>div:last-of-type {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+#playlistView-top>div>div:last-of-type>a {
+    font-size: 16px;
+    font-weight: 700;
+}
+#playlistView-buttons {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 30px;
+    padding-left: 20px;
+}
+#playlistView-buttons .playButton {
+    border-radius: 50%;
+    background-color: black;
+    color: var(--point-color);
+    font-size: 45px;
+}
+#playlistView-buttons>button:hover {
+    transform: scale(1.1);
+    transition-duration: 0.1;
+}
+#playlistView-buttons .dropdownButton {
+    font-size: 25px;
+    color: var(--text-color-middle);
+}
+#playlistView-buttons .dropdownButton:hover {
+    color: white;
+}
+#playlistView-bottom {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px;
+    gap: 20px;
+}
+#playlistView-bottom>div:first-of-type {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 0;
+    border-bottom: 0.5px solid var(--border-color-weak);
+}
+.musicView {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 5px;
+    padding-left: 10px;
+    border-radius: 5px;
+}
+.musicView:hover {
+    cursor: pointer;
+    background-color: var(--content-hover-color);
+}
+.musicView>div:first-of-type {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 50%;
+}
+.musicView>div:nth-of-type(2), .musicView>div:nth-of-type(3) {
+    display: flex;
+    justify-content: space-around;
+    width: 10%;
+}
+.musicView-buttons, .musicView-checkBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 150px;
+    height: 30px;
+    font-size: 20px;
+}
+.musicView-buttons>button:hover {
+    transform: scale(1.2);
+}
+.musicView .dropdown-div {
+    top: 25px;
+    right: 25px;
+}
+#playlistView-similars, #playlistView-recommends {
+    display: flex;
+    justify-content: start;
+    width: 100%;
+}

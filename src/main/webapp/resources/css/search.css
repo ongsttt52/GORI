@@ -1,0 +1,68 @@
+#search-header {
+    display: flex;
+    gap: 5px;
+    padding: 20px 20px 0 20px;
+}
+#search-container {
+    width: 100%;
+    height: 500px;
+    padding: 20px;
+}
+#search-container>div:first-of-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 300px;
+}
+#topResult-wrapper {
+    width: 50%;
+    height: 100%;
+}
+#topResult-content {
+    margin-right: 20px;
+    border-radius: 5px;
+}
+#topResult-wrapper>div:first-of-type {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+}
+#topResult-wrapper>div:first-of-type>div:first-of-type {
+    position: relative;
+}
+#topResult-wrapper>div:first-of-type a {
+    font-size: 30px;
+    font-weight: 800;
+}
+#searchResult-musics {
+    width: 50%;
+    height: 100%;
+}
+#searchResult-musics-content .musicPreview {
+    width: 100%;
+    height: 60px;
+    padding: 5px;
+}
+.musicPreview>div:first-of-type {
+    width: 50%;
+}
+.musicPreview>div:nth-of-type(2) {
+    display: block;
+    width: 30%;
+    text-align: center;
+}
+#search-container>div:not(:first-of-type)>div {
+    display: flex;
+	justify-content: start;
+	align-items: center;
+	gap: 20px;
+	width:100%;
+	margin-bottom: 30px;
+	padding: 10px 0;
+}
+.contentDiv:hover {
+    background-color: var(--content-hover-color);
+    cursor: pointer;
+}

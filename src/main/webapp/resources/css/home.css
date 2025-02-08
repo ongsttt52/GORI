@@ -1,0 +1,112 @@
+main .sectionWrapper {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+#main-content {
+	padding: 20px;
+}
+#main-nav {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	gap: 5px;
+	height: 10%;
+}
+.home-wrappers {
+	width: 100%;
+	min-width: 500px;
+}
+.home-wrapper-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: end;
+}
+.home-containers {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	gap: 20px;
+	width:100%;
+	margin-bottom: 30px;
+	padding: 10px 0;
+}
+#home-artist-container, #home-album-container {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	gap: 20px;
+	width:100%;
+	margin-bottom: 30px;
+	padding: 10px 0;
+}
+#home-chart-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+#home-chart-container {
+	display: flex;
+	flex-direction: column;
+	padding: 10px 0;
+}
+#home-chart-container>div:first-of-type {
+
+}
+.musicView {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	padding: 5px;
+	padding-left: 20px;
+	border-radius: 5px;
+}
+.musicView:hover {
+	cursor: pointer;
+	background-color: var(--content-hover-color);
+}
+.musicView>span:first-of-type {
+	display: block;
+	width: 5%;
+}
+.musicView>div:first-of-type {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	gap: 10px;
+	flex-grow: 1;
+	width: 50%;
+}
+.musicView>div:first-of-type img {
+	width: 50px;
+	height: 50px;
+	border-radius: 5px;
+}
+.musicView>div:first-of-type>div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: start;
+}
+.musicView>div:nth-of-type(2) {
+	width: 10%;
+}
+.musicView>div:nth-of-type(3) {
+	width: 10%;
+}
+.musicView>div:nth-of-type(4) {
+    width: 150px;
+    height: 30px;
+    font-size: 20px;
+}
+.musicView>div:nth-of-type(4)>button {
+    margin-left: 20px;
+}
+.musicView>div:nth-of-type(4)>button:hover {
+    transform: scale(1.2);
+}
+.musicView .dropdown-div {
+    top: 25px;
+    right: 25px;
+}

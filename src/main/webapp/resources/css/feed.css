@@ -1,0 +1,210 @@
+@charset "UTF-8";
+
+#main-feed {
+    display: flex;
+    width: 100%;
+    max-height: 100%;
+}
+#feed-left {
+    width: 60%;
+    max-height: 100%;
+    margin-right: 10px;
+    padding: 20px;
+    padding-top: 10px;
+    border-radius: 10px;
+    background-color: #121212;
+}
+#feed-left-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#feed-left-header .alertMsg {
+    width: 200px;
+    height: 10%;
+    margin-left: 10px;
+    background-color: var(--alert-green);
+}
+#searchFeedButton {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid white;
+    border-radius: 30px;
+}
+#feed-left-main {
+    width: 100%;
+    max-height: 450px;
+    padding-top: 10px;
+}
+.feedDiv {
+    display: flex;
+    flex-direction: column;
+    max-height: 400px; 
+    padding: 10px;
+    border-top : 0.5px solid #484848;
+}
+.feedDiv:first-of-type {
+    border:none;
+}
+.feedDiv-top {
+}
+.feedDiv-user {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+.feedDiv-user>div:first-of-type {
+  display:flex;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+  flex-grow: 1;
+}
+.feedDiv-user span {
+  color: #7B7B7B;
+  font-weight: 400;
+}
+.feedButton {
+  font-size:20px;
+}
+.feedButton:hover {
+  transform: scale(1.3);
+}
+.dropdown-div {
+  position: relative;
+  top: 23px;
+  left: 10px;
+}
+.showCommentButton i {
+  font-size: 25px;
+  color: #ffffff;
+}
+.feedDiv-content {
+  min-height: 50px;
+  max-height: 300px;
+  padding: 10px;
+}
+.feedDiv-content textarea {
+  width: 100%;
+  overflow-y: hidden;
+}
+.feedDiv-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+.feedDiv-bottom>div:first-of-type {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  flex-grow: 1;
+}
+#feed-right, #feed-comment {
+    width: 40%;
+    max-width: 350px;
+    max-height: 100%;
+    border-radius: 10px;
+    background: #171717;
+    overflow: hidden;
+}
+.swiper-container{
+    width: 100%;
+    max-height:100%;
+}
+#writeFeed-search, #writeFeed-formDiv, #searchFeed {
+    width: 100%;
+    max-height: 100%;
+    padding: 10px 20px;
+}
+#writeFeed-search>p, #writeFeed-formDiv p, #searchFeed p {
+    margin-bottom: 20px;
+}
+#writeFeed-searchInput, #searchFeed-searchWord, #searchFeed-searchMusic {
+    width: 100%;
+    margin-bottom: 20px;
+}
+#writeFeed-searchResult, #searchFeed-searchResult {
+    width: 100%;
+    max-height: 350px;
+    overflow-y: scroll;
+    border-radius: 5px;
+}
+#searchFeed-searchResult {
+    height: 200px;
+}
+#writeFeed-text {
+    width: 90%;
+    max-height: 50%;
+    background: #272727;
+    padding: 10px;
+}
+.wordLength {
+    float: right;
+}
+#writeComment, .sessionRequired {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+    border-bottom: 0.5px solid #7B7B7B;
+}
+.sessionRequired {
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 40px;
+}
+#writeComment-user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#writeComment-user div:first-of-type {
+    display: flex;
+    align-items: center;
+}
+#writeComment-text, .commentDiv-content{
+    width:100%;
+    height: 80px;
+    padding: 10px;
+}
+#feed-comment {
+    display:none;
+}
+#feed-comment-main>p {
+    margin-bottom: 20px;
+}
+#commentContainer {
+    width:100%;
+    height: 260px;
+}
+.commentDiv {
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+    height: 150px;
+    padding: 10px 0;
+    border-bottom: 0.5px solid #7B7B7B;
+}
+.commentDiv-user {
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+.commentDiv-user>div:first-of-type{
+    flex-grow: 1;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+}
+.commentDiv .inputSubmit {
+    width: 60px;
+    height: 30px;
+    background-color: white;
+}

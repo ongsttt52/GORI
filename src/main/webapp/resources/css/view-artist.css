@@ -1,0 +1,122 @@
+@charset "UTF-8";
+
+#artistView-wrapper {
+    height: 500px;
+    padding: 20px;
+}
+#artistView-top {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+#artistView-top>div:first-of-type>img {
+    width: 200px;
+    height: 200px;
+}
+#artistView-top>div:nth-of-type(2) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 20px;
+}
+#artistView-top>div:nth-of-type(2)>span:nth-of-type(1) {
+    font-weight: 300;
+}
+#artistView-top>div:nth-of-type(2)>span:nth-of-type(2) {
+    display: block;
+    font-size: 45px;
+    font-weight: 800;
+}
+#artistView-buttons {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+#artistView-buttons .playButton {
+    border-radius: 50%;
+    background-color: black;
+    color: var(--point-color);
+    font-size: 45px;
+}
+#artistView-buttons button .playButton {
+    transform: scale(1.1);
+    transition-duration: 0.1;
+}
+#artistView-buttons .followButton {
+    padding: 5px 10px;
+    border: 1px solid white;
+    border-radius: 30px;
+    color: var(--text-color-middle);
+    font-size: 18px;
+}
+#artistView-buttons .dropdownButton {
+    font-size: 25px;
+    color: var(--text-color-middle);
+}
+#artistView-buttons button:not(:first-of-type):hover {
+    transform: scale(1.1);
+    transition-duration: 0.1;
+    color: white;
+}
+#artistView-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    height: 500px;
+}
+.musicView {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 5px;
+    padding-left: 20px;
+    border-radius: 5px;
+}
+.musicView:hover {
+    cursor: pointer;
+    background-color: var(--content-hover-color);
+}
+.musicView>span:first-of-type {
+    display: block;
+    width: 5%;
+}
+.musicView>div:first-of-type {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    flex-grow: 1;
+    width: 50%;
+}
+.musicView>div:first-of-type img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+}
+.musicView>div:nth-of-type(2) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 150px;
+    height: 30px;
+}
+.musicView>div:nth-of-type(2)>button {
+    margin-left: 20px;
+    font-size: 20px;
+}
+.musicView>div:nth-of-type(2)>button:hover {
+    transform: scale(1.2);
+}
+.musicView .dropdown-div {
+    top: 25px;
+    right: 25px;
+}
+#artistView-bottom>div:not(:first-of-type) {
+    display: flex;
+    justify-content: start;
+    width: 100%;
+}

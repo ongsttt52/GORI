@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gori.playlist">
+	<select id="countMusics" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM playlist_music
+		WHERE playlist_idx = #{playlistIdx}
+	</select>
+	
+	<select id="countSelected" parameterType="map" resultType="int">
+		SELECT COUNT(${col}) FROM playlist
+		<if test="value != null and value != ''">
+			WHERE ${col} = #{value}  
+		</if>
+	</select>
+	
+	<select id="selectGenre" parameterType="String" resultType="MusicDto">
+		SELECT a.genre
+		FROM playlist_music AS pm
+		JOIN music AS m ON m.idx = pm.music_idx
+		JOIN artist AS a ON a.id = m.artist_id
+		
+		WHERE pm.playlist_idx = #{playlistIdx}
+		GROUP BY a.genre
+		ORDER BY COUNT(a.genre) DESC
+		LIMIT 1
+	</select>
+	
+	<insert id="insert" parameterType="PlaylistDto">
+		INSERT INTO playlist(user_idx,type,name,description,playlist_image) VALUES(#{userIdx}, 'playlist', #{name}, #{description}, #{playlistImage})
+	</insert>
+	
+	<insert id="insertMusic" parameterType="map">
+		INSERT INTO playlist_music(playlist_idx, music_idx) VALUES(#{playlistIdx}, #{musicIdx})
+	</insert>
+	
+	<select id="select" parameterType="String" resultType="PlaylistDto">
+		SELECT p.*, u.name AS user_name
+		FROM playlist AS p
+		JOIN user AS u ON u.idx = p.user_idx
+		
+		WHERE p.idx = #{playlistIdx}
+	</select>
+	
+	<select id="selectQuelist" parameterType="String" resultType="PlaylistDto">
+		SELECT * FROM playlist WHERE user_idx = #{value} AND type = 'quelist'
+	</select>
+	
+	<select id="selectLikelist" parameterType="String" resultType="PlaylistDto">
+		SELECT * FROM playlist WHERE user_idx = #{value} AND type = 'likelist'
+	</select>
+	
+	<select id="selectUsersPlaylist" parameterType="String" resultType="PlaylistDto">
+		SELECT * FROM playlist 
+		WHERE user_idx = #{userIdx} AND type != 'quelist'
+		ORDER BY idx DESC
+	</select>
+	
+	<!-- 해당 아티스트가 포함된 플레이리스트를 아티스트의 곡이 많이 포함된 순으로 정렬 -->
+	<select id="selectArtistsPlaylist" parameterType="String" resultType="PlaylistDto">
+		SELECT p.*, u.name AS user_name, COUNT(m.idx) AS music_count
+		 
+		FROM playlist AS p
+		JOIN playlist_music AS pm ON p.idx = pm.playlist_idx
+		JOIN music AS m ON pm.music_idx = m.idx
+		JOIN user AS u ON u.idx = p.user_idx
+		
+		WHERE m.artist_id = #{artistId}
+		AND p.type = 'playlist'
+		GROUP BY p.idx
+		ORDER BY music_count DESC
+        LIMIT 0,5
+	</select>
+	
+	<!-- 같은 장르의 음악이 많이 포함된 순으로 플레이리스트 조회 -->
+	<select id="selectSimilarPlaylists" parameterType="String" resultType="PlaylistDto">
+		SELECT p.*, a.genre, COUNT(m.idx) AS genre_count, u.name AS user_name 
+		FROM playlist AS p
+		JOIN playlist_music AS pm ON pm.playlist_idx = p.idx
+		JOIN music AS m ON pm.music_idx = m.idx
+		JOIN artist AS a ON a.id = m.artist_id
+		JOIN user AS u ON u.idx = p.user_idx
+		
+		WHERE a.genre = #{genre}
+		AND p.idx != #{playlistIdx}
+		AND p.type = 'playlist'
+		GROUP BY p.idx
+		ORDER BY genre_count
+		LIMIT 0,5
+	</select>
+	
+	<select id="searchPlaylist" parameterType="map" resultType="PlaylistDto">
+		SELECT p.*
+		FROM playlist AS p
+		WHERE p.name LIKE CONCAT('%',#{keyword},'%')
+	</select>
+	
+	<delete id="deleteMusic" parameterType="map">
+		DELETE FROM playlist_music 
+		WHERE playlist_idx = #{playlistIdx}
+		AND list_order = #{listOrder}
+	</delete>
+	
+	<delete id="deleteMusicFromLikelist" parameterType="map">
+		DELETE FROM playlist_music 
+		WHERE playlist_idx = #{playlistIdx}
+		AND music_idx = #{musicIdx}
+	</delete>
+</mapper>

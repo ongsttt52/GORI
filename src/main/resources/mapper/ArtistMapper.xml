@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gori.artist">
+	<select id="count" resultType="int">
+		SELECT count(*) FROM artist
+	</select>
+	
+	<select id="countFollower" parameterType="String" resultType="int">
+		SELECT COUNT(ua.is_followed) FROM user_artist AS ua
+		WHERE ua.artist_id = #{artistId}
+		
+	</select>
+
+	<select id="countSelected" parameterType="map" resultType="int">
+		SELECT COUNT(DISTINCT ${col}) FROM artist
+		<if test="value != null and value != ''">
+			WHERE ${col} = #{value}  
+		</if>
+	</select>
+
+	<insert id="insert" parameterType="ArtistDto">
+		insert into artist(id,name,genre,profile_img) values(#{id},#{name},#{genre},#{profileImg})
+	</insert>
+	
+	<select id="select" parameterType="map" resultType="ArtistDto">
+		SELECT a.*, cast(from_unixtime(avg(unix_timestamp(m.release_date))) as date) AS avg_date
+		FROM artist AS a
+		JOIN music AS m ON m.artist_id = a.id
+		WHERE a.${col} = #{value}
+		GROUP BY a.id
+	</select>
+	
+	<select id="selectList" parameterType="map" resultType="ArtistDto">
+		select * from artist
+			where ${col} LIKE #{value}
+	</select>
+	
+	<select id="selectAll" resultType="ArtistDto">
+		select * from artist
+	</select>
+	
+	<select id="selectSearched" parameterType="map" resultType="ArtistDto">
+		select * from artist
+		<if test="col != null and value != null">
+			where ${col} LIKE CONCAT(#{value}, '%')
+		</if>
+		<if test="offset != null and offset >= 0 and pageSize != null and pageSize >= 0">
+			limit ${offset}, ${pageSize}
+		</if>
+	</select>
+	
+	<select id="selectUserArtist" parameterType="map" resultType="ArtistDto">
+		SELECT ua.is_followed
+		FROM user_artist AS ua
+		WHERE ua.artist_id = #{artistId}
+		AND ua.user_idx = #{userIdx}
+	</select>
+	
+	<update id="update" parameterType="map">
+		UPDATE artist SET ${col} = #{value} WHERE ${field} = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM artist WHERE ${col} = #{value}
+	</delete>
+	
+	<!-- home -->
+	<!-- 유저가 최근 한달동안 많이 들은 아티스트 -->
+	<select id="selectUsersRecentArtist" parameterType="String" resultType="ArtistDto">
+		SELECT a.*, cast(from_unixtime(avg(unix_timestamp(m.release_date))) as date) AS avg_date
+		
+		FROM artist AS a
+		JOIN music AS m ON m.artist_id = a.id
+        JOIN user_music AS um ON um.music_idx = m.idx
+		JOIN user AS u ON u.idx = um.user_idx
+		
+		WHERE u.idx = #{userIdx}
+		AND um.last_played_at > DATE_SUB(NOW(), INTERVAL 1 MONTH)
+		
+		GROUP BY a.id
+		ORDER BY um.played_count
+		LIMIT 0,5
+	</select>
+	
+	<!-- 팔로우 여부, 좋아요 한 곡들, 곡을 들은 횟수, 선호 장르 기반 아티스트 추천 -->
+	<select id="selectUsersFavoriteArtist" parameterType="String" resultType="ArtistDto">
+		SELECT a.id,
+		(
+			CASE WHEN ua.is_followed THEN 100 ELSE 0 END +
+			CASE WHEN FIND_IN_SET (a.genre, u.genre) > 0 THEN 50 ELSE 0 END +
+            CASE WHEN SUM(CASE WHEN um.is_liked THEN 1 ELSE 0 END) > 0 THEN SUM(CASE WHEN um.is_liked THEN 1 ELSE 0 END) * 10 ELSE 0 END +
+            CASE WHEN SUM(um.played_count) > 0 THEN SUM(um.played_count) ELSE 0 END
+		) AS score
+		
+		FROM artist AS a
+		JOIN music AS m ON m.artist_id = a.id
+		LEFT JOIN user_artist AS ua ON ua.artist_id = a.id
+		JOIN user AS u ON u.idx = ua.user_idx
+        LEFT JOIN user_music AS um ON um.music_idx = m.idx
+
+		WHERE u.idx = #{userIdx}
+        GROUP BY a.id
+		ORDER BY score DESC
+		LIMIT 0,30
+	</select>
+	
+	<select id="selectFamousArtists" resultType="ArtistDto">
+		SELECT a.*
+		FROM artist AS a
+		JOIN music AS m ON m.artist_id = a.id
+		
+		GROUP BY a.id
+		ORDER BY SUM(m.played_count + m.liked_count*10 + m.feed_count + m.shared_count) DESC
+		LIMIT 0,5
+	</select>
+
+	<!-- view -->
+	<!-- 해당 아티스트와 장르가 같고 발매일 평균이 유사한 아티스트 -->
+	<select id="selectSimilarArtists" parameterType="ArtistDto" resultType="ArtistDto">
+		SELECT a.*, cast(from_unixtime(avg(unix_timestamp(m.release_date))) as date) AS avg_date
+		FROM artist AS a
+		JOIN music AS m ON m.artist_id = a.id
+		
+		WHERE a.genre = #{genre}
+		AND a.id != #{id}
+		GROUP BY a.id
+		HAVING avg_date BETWEEN DATE_SUB(#{avgDate}, INTERVAL 5 YEAR) AND DATE_ADD(#{avgDate}, INTERVAL 5 YEAR)
+		LIMIT 0,5
+	</select>
+</mapper>

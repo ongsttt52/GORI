@@ -1,0 +1,85 @@
+@charset "UTF-8"; 
+/* 
+	HTML 파일에 <meta charset="UTF-8"> 태그를 사용하여 인코딩 방식을 지정하면 CSS 파일의 인코딩 문제도 해결되지만
+	독립적으로 사용되는 CSS 파일이나 복잡한 프로젝트에서는 명시적으로 @charset을 지정하는 것이 좋음 (가장 첫줄에 지정할 것) 
+*/
+	:root {
+	    --point-color: rgb(255, 244, 128);
+	    --text-color: white;
+	    --text-color-weak: rgb(100,100,100);
+	    --text-color-middle: rgb(150,150,150);
+		--body-color: rgb(0, 0, 0);
+		--section-color: rgb(18, 18, 18);
+		--content-color: rgb(23, 23, 23);
+		--content-hover-color: rgb(40,40,40);
+	    --button-color: rgb(40,40,40);
+	    --button-hover-color: rgb(70,70,70);
+		--input-border-color: rgb(80,80,80);
+		--border-color-weak: rgb(50,50,50);
+	    --scroll-color : rgb(90,90,90);
+	    --scroll-hover-color: rgb(137,137,137);
+	    --alert-red: rgb(255, 20, 20);
+	    --alert-orange: rgb(255, 94, 0);
+	    --alert-green: rgb(0, 172, 23);
+	    --logo: "resources/css/image/icon/logo.png";
+	}
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	  }
+	body {
+		width: 100%;
+		height: 100%;
+		background-color: #000000;
+		color: white;
+		font-family: "Noto Sans KR", sans-serif;
+		font-size: 15px;
+		font-weight: 500;
+		line-height: 1.5;
+	}
+	input, button, textarea, select {
+	  	border: none;
+	  	outline: none;
+	  	background-color: transparent;
+		font: inherit;
+		color: inherit;
+	}
+	button {
+	    cursor: pointer;
+	}
+	a {
+	    text-decoration: none;
+	    color: inherit;
+	    cursor: pointer;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+	hr {
+	    border: none;
+	    border-top: 0.5px solid gray;
+	}
+	ul, ol {
+	    list-style: none;
+	}
+	table {
+		border-collapse: collapse;
+	}
+	th, hr {
+		text-align: center;
+	}
+	textarea {
+		resize: none; /* 크기 조절 비활성화 */
+	}
+	img, video {
+	    max-width: 100%;
+	    height: auto;
+	    object-fit: cover;
+	}
+	.noto-sans-kr {
+	    font-family: "Noto Sans KR", sans-serif;
+	    font-optical-sizing: auto;
+	    font-weight: 500;
+	    font-style: normal;
+  	}

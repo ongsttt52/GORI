@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gori.music">
+
+	<sql id="colsForMusic"> <!-- JOIN artist, music_artist-->
+		m.*, SUM(m.played_count + m.liked_count*10 + m.feed_count + m.shared_count) AS popularity,
+		GROUP_CONCAT(ma.artist_name ORDER BY ma.role='main' DESC) AS artist_name,
+		a.genre, a.profile_img
+	</sql>
+	
+	<sql id="colsForAlbum"> <!-- JOIN artist -->
+		m.idx, m.artist_id, m.album_id, m.album_name, m.album_img, m.release_date,
+		SUM(m.played_count +m.liked_count*10 + m.feed_count + m.shared_count) AS popularity,
+		a.name AS artist_name, a.genre, a.profile_img
+	</sql>
+
+	<select id="count" resultType="int">
+		SELECT count(*) FROM music
+	</select>
+	
+	<select id="countSelected" parameterType="map" resultType="int">
+		SELECT COUNT(DISTINCT ${col}) FROM music
+		<if test="value != null and value != ''">
+			WHERE ${col} = #{value}  
+		</if>
+	</select>
+	
+	<insert id="insert" parameterType="MusicDto" useGeneratedKeys="true" keyProperty="idx">
+		insert into music(title,artist_id,lyrics,duration,album_id,album_name,album_img,release_date,track_number,preview_url)
+		values (#{title},#{artistId},#{lyrics},#{duration},#{albumId},#{albumName},#{albumImg},#{releaseDate},#{trackNumber},#{previewUrl})
+	</insert>
+	
+	<insert id="insertArtistName" parameterType="map">
+		insert into music_artist(music_idx, artist_id, artist_name, role)
+		values (#{musicIdx}, #{artistId}, #{artistName}, #{role})
+	</insert>	
+	
+	<select id="select" parameterType="map" resultType="MusicDto">
+	    SELECT m.*, GROUP_CONCAT(ma.artist_name ORDER BY ma.role='main' DESC),
+	    SUM(m.played_count+m.liked_count+m.feed_count+m.shared_count) as popularity
+	    	FROM music AS m
+	    	JOIN music_artist AS ma ON ma.music_idx= m.idx
+	    	WHERE m.${col} = #{value}
+	    	GROUP BY m.idx
+	</select>
+	
+	<select id="selectMusic" parameterType="map" resultType="MusicDto">
+		SELECT m.*, SUM(m.played_count+m.liked_count+m.feed_count+m.shared_count) as popularity,
+		GROUP_CONCAT(ma.artist_name ORDER BY ma.role='main' DESC) as artist_name,
+		a.genre, a.profile_img
+	    	FROM music AS m
+	    	JOIN music_artist AS ma ON ma.music_idx = m.idx 
+	    	JOIN artist AS a ON a.id = m.artist_id
+	    	WHERE m.${col} LIKE #{value}
+	    	GROUP BY m.idx
+    		ORDER BY m.track_number ASC
+	</select>
+	
+	<select id="selectMusicsInAlbum" parameterType="String" resultType="MusicDto">
+		SELECT <include refid="colsForMusic"/>
+			FROM music AS m
+			JOIN artist AS a ON a.id = m.artist_id 
+			JOIN music_artist AS ma ON ma.music_idx = m.idx 
+			WHERE m.album_id LIKE #{albumId}
+			GROUP BY m.idx
+			ORDER BY m.track_number ASC
+	</select>
+	
+	<select id="selectAlbum" parameterType="String" resultType="MusicDto">
+		SELECT <include refid="colsForAlbum"/>
+			FROM music AS m
+			JOIN artist AS a ON a.id = m.artist_id 
+			WHERE m.album_id = #{albumId}
+			GROUP BY m.album_id
+	</select>
+	
+	<select id="selectAlbumsInArtist" parameterType="String" resultType="MusicDto">
+		SELECT <include refid="colsForAlbum"></include>
+			FROM music AS m
+			JOIN artist AS a ON a.id = m.artist_id
+	    	WHERE m.artist_id LIKE #{artistId}
+	    	GROUP BY m.album_id
+	    	ORDER BY m.release_date DESC
+	</select>
+	
+	<select id="selectSearchedAlbum" parameterType="map" resultType="MusicDto">
+		SELECT DISTINCT m.album_id, m.album_name, m.album_img, m.release_date, a.name AS artistName 
+			FROM music AS m
+			JOIN artist AS a ON a.id = m.artist_id 
+		<if test="col != null and value != null and value != ''">
+			WHERE ${col} LIKE CONCAT(#{value}, '%')
+		</if>
+		<if test="offset != null and offset >= 0 and pageSize != null and pageSize >= 0">
+			LIMIT ${offset}, ${pageSize}
+		</if>
+	</select>
+	
+	<select id="selectSearchedMusic" parameterType="map" resultType="MusicDto">
+		SELECT m.*, 
+		GROUP_CONCAT(ma.artist_name ORDER BY ma.role='main' DESC) AS artist_name
+			FROM music AS m
+			JOIN music_artist AS ma ON ma.music_idx = m.idx
+		<if test="col != null and value != null">
+			AND ${col} LIKE CONCAT(#{value}, '%')
+		</if>
+			GROUP BY m.idx
+		<if test="offset != null and offset >= 0 and pageSize != null and pageSize >= 0">
+			LIMIT ${offset}, ${pageSize}
+		</if>
+	</select>
+	
+	<select id="selectSearchedMusic2" parameterType="map" resultType="MusicDto">
+		SELECT a.name AS artist_name, a.profile_img, m.artist_id, m.idx, m.title, m.album_img, m.album_name, m.album_id, m.preview_url,
+		SUM(m.played_count+m.liked_count+m.feed_count+m.shared_count) AS popularity,
+		    (CASE WHEN a.name = #{value} THEN 10 ELSE 0 END +
+		     CASE WHEN m.title = #{value} THEN 11 ELSE 0 END +
+		     CASE WHEN m.album_name = #{value} THEN 9 ELSE 0 END +
+		     CASE WHEN a.name LIKE CONCAT(#{value}, '%') THEN 8 ELSE 0 END +
+		     CASE WHEN m.title LIKE CONCAT(#{value}, '%') THEN 8 ELSE 0 END +
+		     CASE WHEN m.album_name LIKE CONCAT(#{value}, '%') THEN 7 ELSE 0 END + 
+		     CASE WHEN a.name LIKE CONCAT('%', #{value}, '%') THEN 6 ELSE 0 END +
+		     CASE WHEN m.title LIKE CONCAT('%', #{value}, '%') THEN 6 ELSE 0 END +
+		     CASE WHEN m.album_name LIKE CONCAT('%', #{value}, '%') THEN 5 ELSE 0 END)
+		     AS match_score
+	    FROM music AS m
+	    JOIN artist AS a ON a.id = m.artist_id 
+	    <choose>
+	    <when test="value.length() == 1">
+        WHERE m.title LIKE CONCAT(#{value}, '%')
+        </when>
+        <otherwise>
+        WHERE a.name LIKE CONCAT('%', #{value}, '%')
+        OR m.title LIKE CONCAT('%', #{value}, '%')
+        OR m.album_name LIKE CONCAT('%', #{value}, '%')
+        </otherwise>
+        </choose>
+	    <if test="value.length() >= 5">
+	    OR lyrics LIKE CONCAT('%', #{value}, '%')
+	    </if>
+	    GROUP BY m.idx
+	    ORDER BY match_score DESC, popularity DESC
+	</select>
+	
+	<select id="selectSearchedBetween" parameterType="map" resultType="MusicDto">
+		SELECT <include refid="colsForMusic"></include>,
+		    (CASE WHEN a.name = #{value} THEN 10 ELSE 0 END +
+		     CASE WHEN m.title = #{value} THEN 11 ELSE 0 END +
+		     CASE WHEN m.album_name = #{value} THEN 9 ELSE 0 END +
+		     CASE WHEN a.name LIKE CONCAT(#{value}, '%') THEN 8 ELSE 0 END +
+		     CASE WHEN m.title LIKE CONCAT(#{value}, '%') THEN 8 ELSE 0 END +
+		     CASE WHEN m.album_name LIKE CONCAT(#{value}, '%') THEN 7 ELSE 0 END + 
+   		     CASE WHEN a.name LIKE CONCAT('%', #{value}, '%') THEN 6 ELSE 0 END +
+		     CASE WHEN m.title LIKE CONCAT('%', #{value}, '%') THEN 6 ELSE 0 END +
+		     CASE WHEN m.album_name LIKE CONCAT('%', #{value}, '%') THEN 5 ELSE 0 END)
+		     AS match_score
+	    FROM music AS m
+	    JOIN artist AS a ON a.id = m.artist_id
+		JOIN music_artist AS ma ON ma.music_idx = m.idx
+	    
+	    <choose>
+	    <when test="value.length() == 1">
+        WHERE m.title LIKE CONCAT(#{value}, '%')
+        </when>
+        <otherwise>
+        WHERE a.name LIKE CONCAT('%', #{value}, '%')
+        OR m.title LIKE CONCAT('%', #{value}, '%')
+        OR m.album_name LIKE CONCAT('%', #{value}, '%')
+        </otherwise>
+        </choose>
+		OR m.title BETWEEN #{word1} AND #{word2}
+	    GROUP BY m.idx
+	    ORDER BY match_score DESC, popularity DESC
+	</select>
+	
+	<update id="update" parameterType="map">
+		UPDATE music SET ${col} = #{value} WHERE ${field} LIKE #{id}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM music WHERE ${col} = #{value}
+	</delete>
+
+	<!-- home -->
+	<!-- 유사한 아티스트 그룹에서 믹스 앨범 만들기 -->
+	<select id="selectUsersMixAlbum" parameterType="map" resultType="MusicDto">
+		SELECT <include refid="colsForAlbum"/>
+		
+		FROM music AS m
+		JOIN artist AS a ON a.id = m.artist_id
+		JOIN music_artist AS ma ON ma.music_idx = m.idx
+		JOIN user_music AS um ON um.music_idx = m.idx
+		
+		WHERE a.id IN
+		<foreach item="id" collection="idList" open="(" separator="," close=")">
+        	#{id}
+    	</foreach>
+		GROUP BY m.idx
+		ORDER BY RAND()
+		LIMIT 0,50
+	</select>
+	
+	<!-- 일주일간 유저들이 가장 많이 들은 노래 -->
+	<select id="selectHottest" resultType="MusicDto">
+		SELECT m.*, a.name AS artist_name, SUM(um.weekly_played) AS weekly_played
+			FROM music AS m
+			JOIN artist AS a ON a.id = m.artist_id
+			JOIN music_artist AS ma ON ma.music_idx = m.idx
+	    	JOIN user_music AS um ON um.music_idx = m.idx 
+			WHERE um.last_played_at > DATE_SUB(NOW(), INTERVAL 7 DAY)
+			GROUP BY m.idx
+			ORDER BY weekly_played DESC
+			LIMIT 0,5
+	</select>
+	
+	<!-- 발매일이 한 달 안쪽인 앨범 -->
+	<select id="selectRecentAlbum" parameterType="String" resultType="MusicDto">
+		SELECT <include refid="colsForAlbum"></include>
+		FROM music AS m
+		JOIN artist AS a ON a.id = m.artist_id
+		
+		WHERE m.release_date > DATE_SUB(NOW(), INTERVAL 1 MONTH)
+		<if test="artistId != null"> 
+			AND m.artist_id = #{artistId}
+		</if>
+		
+		GROUP BY m.album_id
+		ORDER BY m.release_date DESC
+		LIMIT 1
+	</select>
+
+	<!-- 마지막으로 들은지 한 달 ~ 1년 된 음악 -->
+	<select id="selectPlayedMonthLater" parameterType="String" resultType="MusicDto">
+		SELECT <include refid="colsForMusic"/>
+		FROM music AS m
+		JOIN artist AS a ON a.id = m.artist_id
+		JOIN music_artist AS ma ON ma.music_idx = m.idx
+		JOIN user_music AS um ON um.music_idx = m.idx
+		
+		WHERE um.user_idx = #{userIdx}
+		AND um.last_played_at BETWEEN DATE_SUB(NOW(), INTERVAL 1 YEAR) AND DATE_SUB(NOW(), INTERVAL 1 MONTH)
+		AND um.played_count > 10
+		ORDER BY RAND()
+		LIMIT 0,5
+	</select>
+	
+	<select id="selectFamousAlbums" resultType="MusicDto">
+		SELECT <include refid="colsForAlbum"/>
+		FROM music AS m
+		JOIN artist AS a ON a.id = m.artist_id
+		
+		GROUP BY m.album_id
+		ORDER BY popularity DESC
+		LIMIT 0,5
+	</select>
+	
+	<!-- view -->
+	<select id="selectPopularMusics" parameterType="String" resultType="MusicDto">
+		SELECT <include refid="colsForMusic"/>
+			FROM music AS m
+			JOIN artist AS a ON a.id = m.artist_id
+			JOIN music_artist AS ma ON ma.music_idx = m.idx
+			WHERE m.artist_id = #{artistId}
+			GROUP BY m.idx
+			ORDER BY popularity DESC
+			LIMIT 0,5
+	</select>
+	
+	<select id="selectOtherAlbums" parameterType="String" resultType="MusicDto">
+		SELECT <include refid="colsForAlbum"/>
+			FROM music AS m
+			JOIN artist AS a ON a.id = m.artist_id 
+			WHERE m.artist_id IN (
+				SELECT artist_id FROM music
+				WHERE album_id = #{albumId} )
+			AND m.album_id != #{albumId}
+			GROUP BY album_id
+	</select>
+	
+	<select id="selectSimilarAlbums" parameterType="map" resultType="MusicDto">
+		SELECT <include refid="colsForAlbum"/>,
+	    ABS(DATEDIFF(m.release_date, #{releaseDate})) AS similar_rate
+	    
+        FROM music AS m
+        JOIN artist AS a ON a.id = m.artist_id
+        JOIN music_artist AS ma ON ma.music_idx = m.idx
+        
+        WHERE a.id != #{artistId}
+        AND a.genre = #{genre}
+        AND m.release_date BETWEEN DATE_SUB(#{releaseDate}, INTERVAL 5 YEAR) AND DATE_ADD(#{releaseDate}, INTERVAL 5 YEAR)
+        
+        GROUP BY m.album_id
+        
+        ORDER BY similar_rate DESC
+        LIMIT 0,5
+	</select>
+	
+	<!-- playlist -->
+	<select id="selectMusicsInPlaylist" parameterType="String" resultType="MusicDto">
+		SELECT <include refid="colsForMusic"/>, pm.list_order
+		
+		FROM playlist_music AS pm
+		JOIN playlist AS p ON p.idx = pm.playlist_idx
+		JOIN music AS m ON m.idx = pm.music_idx
+		JOIN music_artist AS ma ON ma.music_idx = m.idx
+		JOIN artist AS a ON a.id = m.artist_id
+		
+		WHERE pm.playlist_idx = #{playlistIdx}
+        GROUP BY pm.list_order
+        ORDER BY pm.list_order ASC
+	</select>
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gori.user">
+	<select id="count" resultType="int">
+		select count(*) from user
+	</select>
+	
+	<delete id="deleteAll">
+		delete from user
+	</delete>
+	
+	<insert id="insert" parameterType="UserDto">
+		insert into user(email,pwd,name,birth,gender,is_agreed,profile_img,genre)
+		values(#{email}, #{pwd}, #{name}, #{birth}, #{gender}, #{isAgreed}, #{profileImg}, #{genre})
+	</insert>
+	
+	<select id="select" parameterType="map" resultType="UserDto">
+		select * from user where ${col} = #{value}
+	</select>
+	
+	<select id="selectAll" resultType="UserDto">
+		SELECT * FROM user;
+	</select>
+	
+	<select id="selectSearched" parameterType="map" resultType="UserDto">
+		SELECT * FROM user
+		<if test="col != null and value != null">
+			WHERE ${col} LIKE CONCAT(#{value}, '%')
+		</if>
+		<if test="offset != null and offset >= 0 and pageSize != null and pageSize >= 0">
+			LIMIT ${offset}, ${pageSize} 
+		</if>
+	</select>
+	
+	<update id="update" parameterType="map">
+		UPDATE user SET ${col} = #{value} WHERE idx = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM user WHERE idx = #{id}
+	</delete>
+	
+	<!-- user_artist -->
+	<insert id="insertUserArtist" parameterType="map">
+		INSERT INTO user_artist(user_idx, artist_id, is_followed)
+		VALUES(#{userIdx}, #{artistId}, '1')
+	</insert>
+	
+	<delete id="deleteUserArtist" parameterType="map">
+		DELETE FROM user_artist 
+		WHERE user_idx = #{userIdx}
+		AND artist_id = #{artistId}
+	</delete>
+	
+	<!-- user_music -->
+	<insert id="insertUserMusic" parameterType="map">
+		INSERT INTO user_music(user_idx, music_idx) VALUES(#{userIdx}, #{musicIdx})
+	</insert>
+	
+	<select id="selectUserMusic" parameterType="map" resultType="MusicDto">
+		SELECT music_idx AS idx, is_liked FROM user_music
+		WHERE user_idx = #{userIdx}
+		AND music_idx = #{musicIdx}
+	</select>
+	
+	<update id="userPlayedMusic" parameterType="map">
+		UPDATE user_music 
+		SET played_count = played_count + 1,
+		weekly_played = weekly_played + 1,
+		last_played_at = NOW()
+		WHERE user_idx = #{userIdx}
+		AND music_idx = #{musicIdx}
+	</update>
+	
+	<update id="musicPlayed" parameterType="map">
+		UPDATE music
+		SET played_count = played_count + 1
+		WHERE music_idx = #{musicIdx}
+	</update>
+	
+	<update id="userLikeMusic" parameterType="map">
+		UPDATE user_music SET is_liked = '1'
+		WHERE user_idx = #{userIdx}
+		AND music_idx = #{musicIdx}
+	</update>
+	
+	<update id="userNotLikeMusic" parameterType="map">
+		UPDATE user_music SET is_liked = '0'
+		WHERE user_idx = #{userIdx}
+		AND music_idx = #{musicIdx}
+	</update>
+</mapper>

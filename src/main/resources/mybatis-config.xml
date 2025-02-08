@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+    	<setting name="mapUnderscoreToCamelCase" value="true" />
+    </settings>
+	<typeAliases>
+		<typeAlias type="com.taek.gori.dto.UserDto" alias="UserDto"/>
+		<typeAlias type="com.taek.gori.dto.MusicDto" alias="MusicDto"/>
+		<typeAlias type="com.taek.gori.dto.ArtistDto" alias="ArtistDto"/>
+		<typeAlias type="com.taek.gori.dto.FeedDto" alias="FeedDto"/>
+		<typeAlias type="com.taek.gori.dto.CommentDto" alias="CommentDto"/>
+		<typeAlias type="com.taek.gori.dto.PlaylistDto" alias="PlaylistDto"/>
+	</typeAliases>
+</configuration>

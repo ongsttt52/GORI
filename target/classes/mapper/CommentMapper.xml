@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gori.comment">
+	<select id="countComments" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM comment
+		WHERE feed_idx = #{feedIdx}
+	</select>
+	
+	<insert id="insert" parameterType="commentDto" useGeneratedKeys="true" keyProperty="idx">
+		INSERT INTO comment(feed_idx, user_idx, content) 
+		VALUES(#{feedIdx}, #{userIdx}, #{content})
+	</insert>
+	
+	<select id="selectComments" parameterType="String" resultType="CommentDto">
+		SELECT c.*, u.name AS userName, u.profile_img AS userImg
+		FROM comment AS c
+		JOIN user AS u ON c.user_idx = u.idx
+		WHERE feed_idx = #{feedIdx}
+	</select>
+	
+	<update id="update" parameterType="map">
+		UPDATE comment SET content = #{content} WHERE idx = #{idx}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM comment WHERE idx = #{idx}
+	</delete>
+</mapper>

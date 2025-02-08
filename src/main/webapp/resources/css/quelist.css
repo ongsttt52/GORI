@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+#right-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+#right-header>div:last-of-type {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+#quelist-chooseDiv {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    padding: 0 20px;
+}
+#quelist-chooseDiv button:not(:last-of-type):hover {
+    color: white;
+    transform: scale(1.1);
+}
+#quelist-searchInput {
+    width: 200px;
+    height: 40px;
+}
+#right-quelist {
+    height: 100%;
+    max-height: 450px;
+}
+#quelist-list {
+    height: 80%;
+}
+.quelist-playing {
+    background-color: var(--button-hover-color);
+}
+.musicPreview>div:last-of-type {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.musicPreview>div:last-of-type button:hover{
+    transform:scale(1.2);
+}
+.dropdown-div {
+    top: 30px;
+    right: 30px;
+}
+#quelist-list input[type="checkbox"] {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #7e7e7e;
+    border-radius: 5px;
+    text-align: center;
+}

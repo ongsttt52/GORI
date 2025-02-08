@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gori.feed">
+	<select id="count" resultType="int">
+		SELECT COUNT(*) FROM feed
+	</select>
+	
+	<select id="countSelected" parameterType="map" resultType="int">
+		SELECT COUNT(f.idx) FROM feed AS f
+		JOIN user AS u ON f.user_idx = u.idx
+		<where> 
+		<choose>
+		<when test="col == 'content' and value != null and value != ''">
+			f.${col} LIKE CONCAT('%',#{value},'%')
+		</when>
+		<when test="col == 'name' and value != null and value != ''">
+			AND u.${col} LIKE CONCAT('%',#{value},'%')
+		</when>
+		</choose>
+		<if test="musicIdx != null and musicIdx != ''">
+			AND music_idx = #{musicIdx}
+		</if>
+		</where>
+	</select>
+
+	<insert id="insert" parameterType="FeedDto" useGeneratedKeys="true" keyProperty="idx">
+		INSERT INTO feed(user_idx, music_idx, content) VALUES(#{userIdx}, #{musicIdx}, #{content})
+	</insert>
+	
+	<select id="select" parameterType="map" resultType="FeedDto">
+		SELECT f.*, u.name AS userName, u.profile_img AS userImg, m.title AS musicName, m.album_img AS musicImg, m.preview_url,
+			GROUP_CONCAT(ma.artist_name ORDER BY role = 'main' DESC) AS artistName
+			FROM feed AS f 
+			JOIN user AS u ON f.user_idx = u.idx
+			JOIN music AS m ON f.music_idx = m.idx
+			JOIN music_artist AS ma ON f.music_idx = ma.music_idx
+			WHERE f.${col} = #{value}
+			GROUP BY f.idx
+	</select>
+	<select id="selectAll" resultType="FeedDto">
+		SELECT f.*, u.name AS userName, u.profile_img AS userImg, m.title AS musicName, m.album_img AS musicImg, m.preview_url,
+			GROUP_CONCAT(ma.artist_name ORDER BY role = 'main' DESC) AS artistName
+			FROM feed AS f 
+			JOIN user AS u ON f.user_idx = u.idx
+			JOIN music AS m ON f.music_idx = m.idx
+			JOIN music_artist AS ma ON f.music_idx = ma.music_idx
+			GROUP BY f.idx
+	</select>
+	<select id="selectSearched" parameterType="map" resultType="FeedDto">
+		SELECT f.*, u.name AS userName, u.profile_img AS userImg, m.title AS musicName, m.album_img AS musicImg, m.preview_url,
+			GROUP_CONCAT(ma.artist_name ORDER BY role = 'main' DESC) AS artistName
+			FROM feed AS f 
+			JOIN user AS u ON f.user_idx = u.idx
+			JOIN music AS m ON f.music_idx = m.idx
+			JOIN music_artist AS ma ON f.music_idx = ma.music_idx
+		<where>
+		<choose>
+		<when test="col == 'content' and value != null and value != ''">
+			f.${col} LIKE CONCAT('%',#{value},'%')
+		</when>
+		<when test="col == 'name' and value != null and value != ''">
+			AND u.${col} LIKE CONCAT('%',#{value},'%')
+		</when>
+		</choose>
+		<if test="musicIdx != null and musicIdx != ''">
+			AND f.music_idx = #{musicIdx}
+		</if>
+		</where>
+			GROUP BY f.idx
+			ORDER BY f.idx DESC
+		<if test="offset != null and offset >= 0 and pageSize != null and pageSize >= 0">
+			LIMIT ${offset}, ${pageSize}
+		</if>
+	</select>
+	
+	<update id="update" parameterType="map">
+		UPDATE feed SET ${col} = #{value}
+		WHERE idx = #{idx}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM feed WHERE idx = #{feedIDx}
+	</delete>
+</mapper>

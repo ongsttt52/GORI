@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+#toolBar {
+    grid-column: 1/4;
+    grid-row: 3/4;
+    display: flex;
+    width: 100%;
+    min-width: 1300px;
+    max-height: 100%;
+}
+#toolBar button {
+    margin-right: 20px;
+    font-size: 20px;
+    color: var(--text-color-middle );
+}
+#toolBar button:hover {
+    color: white;
+    transform:scale(1.1);
+}
+#toolBar-left, #toolBar-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+}
+#toolBar-left .musicPreview:hover {
+    cursor: pointer;
+    background-color: transparent;
+}
+#toolBar-center {
+    width: 50%;
+    height: 100%;
+}
+#toolBar-center-top, #toolBar-center-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+}
+#toolBar-center-top {
+    padding-top: 20px;
+}
+#durationBar-wrapper {
+    width: 70%;
+    height: 5px;
+    border-radius: 5px;
+    background-color: var(--button-hover-color);
+    cursor: pointer;
+}
+#durationBar, #toolBar-volumeBar {
+    position: relative;
+    width: 0;
+    height: 100%;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: white;
+}
+#toolBar-volumeBar {
+    width: 100%;
+}
+#durationButton, #toolBar-volumeButton {
+    display: none;
+    position: absolute;
+    bottom: -100%;
+    left: 100%;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: white;
+    cursor: pointer;
+}
+#toolBar-right>div:first-of-type {
+    display: flex;
+    align-items: center;
+}
+#toolbar-right>div:first-of-type button {
+    margin: 0;
+}
+#toolBar-volume {
+    
+}
+#volumeBar-wrapper {
+    width: 120px;
+    height: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+    background-color: var(--button-hover-color);
+    cursor: pointer;
+}
