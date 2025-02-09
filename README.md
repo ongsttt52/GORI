@@ -97,14 +97,10 @@ er diagram : https://drive.google.com/file/d/1pkyKuoiNpd0uCI-sZpvU7cTXttRo8r0r/v
 <div>
     <ul>
         <li>
-            <strong>Main Page</strong>
+            <strong>메인 화면</strong>
             <ul>
-                <li>Top Section: Latest or Pinned Announcements (Up to 3) / Temporary Password Change Prompt</li>
-                <li>New Magazines (20 Items)</li>
-                <li>Random Book Extractor / Latest Sentence Collection</li>
-                <li>Newsletter Subscription</li>
-                  <img src="https://i.imgur.com/hTVfFI3.png" width="500px">
-                  <img src="https://i.imgur.com/7Tse7DV.png" width="500px">
+                <li>음악 재생, 음원 검색, 재생목록, 플레이리스트 재생, 앨범 추천 등</li>
+                  <img src="https://private-user-images.githubusercontent.com/177156866/411281862-b0c70550-cd04-4915-839a-d22abe122fca.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzkwNzE0NTIsIm5iZiI6MTczOTA3MTE1MiwicGF0aCI6Ii8xNzcxNTY4NjYvNDExMjgxODYyLWIwYzcwNTUwLWNkMDQtNDkxNS04MzlhLWQyMmFiZTEyMmZjYS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwMjA5JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDIwOVQwMzE5MTJaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0wZGY5NzJjYTgwODEyZTVkYTQ3NjUyMzMxMjU0YmFkZTJjNzkyYmJhYTg5Yzc2NGQxNjdmNGQ5MDEyZjI0MWY5JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.sY6UyqnskxXURpZ-oG_QuoHiK6Pu-hXmT8EWD0JJoUY" width="500px">
             </ul>
         </li>
         <br/>
