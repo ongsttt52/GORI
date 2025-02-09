@@ -109,18 +109,8 @@ er diagram : https://drive.google.com/file/d/1pkyKuoiNpd0uCI-sZpvU7cTXttRo8r0r/v
             <ul>
                 <li>프론트 유효성 검사</li>
                 <li>아이디 중복검사</li>
-                  <img src="[https://i.imgur.com/EOhnk2h.png](https://private-user-images.githubusercontent.com/177156866/411282048-3cda303e-4a4f-42ce-ad68-6056c37d887f.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzkwNzE0NTIsIm5iZiI6MTczOTA3MTE1MiwicGF0aCI6Ii8xNzcxNTY4NjYvNDExMjgyMDQ4LTNjZGEzMDNlLTRhNGYtNDJjZS1hZDY4LTYwNTZjMzdkODg3Zi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwMjA5JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDIwOVQwMzE5MTJaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1lMTk5Zjg4ZjU5MTZjMWZkNWZlN2ZjMGFlNWI5NTNiZmNmMzQzYmY3MjdlZDExZTgwMTBlZjAxNjQzZDUxZmJlJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.61DN8hK4GroeaAc0AyCU_t89GEWD3h8ZXqR3fxqDm0Y)" width="500px">
-                 <img src="[https://i.imgur.com/jprSs3o.png](https://private-user-images.githubusercontent.com/177156866/411282010-610f91df-a5a9-4e7a-967b-4e3142ef0b64.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzkwNzE3NzMsIm5iZiI6MTczOTA3MTQ3MywicGF0aCI6Ii8xNzcxNTY4NjYvNDExMjgyMDEwLTYxMGY5MWRmLWE1YTktNGU3YS05NjdiLTRlMzE0MmVmMGI2NC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwMjA5JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDIwOVQwMzI0MzNaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT03ZTNhNWVhZWIyNzQ4MjFiOTcxN2Q4NGZiODk5ZmYwZmQxOThlOTFiOTdmZDIyYzljYjg3OTQxNDY4OTE1MzM1JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.beqxvB-Ic8GfBhmpwB9dQliToabYjcXptUusRLOoei4)" width="500px">
-            </ul>
-        </li>
-        <br/>
-        <li>
-            <strong>회원가입</strong>
-            <ul>
-                <li>Order History / Account Information / Favorite Items</li>
-                <li>Points / Inquiries</li>
-                <li>Shipping Address Management / Subscription Management</li>
-                  <img src="https://i.imgur.com/jprSs3o.png" width="500px">
+                  <img src="https://private-user-images.githubusercontent.com/177156866/411282048-3cda303e-4a4f-42ce-ad68-6056c37d887f.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzkwNzE0NTIsIm5iZiI6MTczOTA3MTE1MiwicGF0aCI6Ii8xNzcxNTY4NjYvNDExMjgyMDQ4LTNjZGEzMDNlLTRhNGYtNDJjZS1hZDY4LTYwNTZjMzdkODg3Zi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwMjA5JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDIwOVQwMzE5MTJaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1lMTk5Zjg4ZjU5MTZjMWZkNWZlN2ZjMGFlNWI5NTNiZmNmMzQzYmY3MjdlZDExZTgwMTBlZjAxNjQzZDUxZmJlJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.61DN8hK4GroeaAc0AyCU_t89GEWD3h8ZXqR3fxqDm0Y" width="500px">
+                 <img src="https://private-user-images.githubusercontent.com/177156866/411282010-610f91df-a5a9-4e7a-967b-4e3142ef0b64.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzkwNzE3NzMsIm5iZiI6MTczOTA3MTQ3MywicGF0aCI6Ii8xNzcxNTY4NjYvNDExMjgyMDEwLTYxMGY5MWRmLWE1YTktNGU3YS05NjdiLTRlMzE0MmVmMGI2NC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwMjA5JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDIwOVQwMzI0MzNaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT03ZTNhNWVhZWIyNzQ4MjFiOTcxN2Q4NGZiODk5ZmYwZmQxOThlOTFiOTdmZDIyYzljYjg3OTQxNDY4OTE1MzM1JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.beqxvB-Ic8GfBhmpwB9dQliToabYjcXptUusRLOoei4" width="500px">
             </ul>
         </li>
         <br/>
