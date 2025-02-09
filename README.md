@@ -6,10 +6,10 @@
 
 Link : 준비중 <br/>
 PDF (45p) : https://www.miricanvas.com/v/13zq274 <br/>
-Download 
-PDF : https://drive.google.com/file/d/11CnsBAK-ZvqyB-bf3c73GXYIN9MUZ1SJ/view?usp=drive_link, 
-요구사항 정의서 : https://drive.google.com/file/d/1pkyKuoiNpd0uCI-sZpvU7cTXttRo8r0r/view?usp=drive_link, 
-er diagram : https://drive.google.com/file/d/15-VETOc3EE-phL5dZS0HYTIKwtCsMX1x/view?usp=drive_link
+Download <br/>
+PDF : https://drive.google.com/file/d/11CnsBAK-ZvqyB-bf3c73GXYIN9MUZ1SJ/view?usp=drive_link <br/>
+er diagram : https://drive.google.com/file/d/1pkyKuoiNpd0uCI-sZpvU7cTXttRo8r0r/view?usp=drive_link <br/> 
+요구사항 정의서 : https://drive.google.com/file/d/15-VETOc3EE-phL5dZS0HYTIKwtCsMX1x/view?usp=drive_link <br/>
 
 <h1>사용된 기술 스택</h1>
 <ul>
