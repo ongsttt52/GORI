@@ -74,9 +74,9 @@ er diagram : https://drive.google.com/file/d/1pkyKuoiNpd0uCI-sZpvU7cTXttRo8r0r/v
             </ul>
         </li>
         <li>
-            <strong>실시간 피드</strong>
+            <strong>피드</strong>
             <ul>
-                <li>특정 음원을 선택하여 메세지와 함께 실시간 피드 작성</li>    
+                <li>특정 음원을 선택하여 메세지와 함께 피드 작성</li>    
                 <li>피드 목록 페이지네이션, 피드 수정, 삭제</li>
                 <li>댓글 작성, 수정, 삭제</li>
             </ul>
