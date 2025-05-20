@@ -5,8 +5,6 @@
 > 개발 인원 : 1명 <br/>
 
 Link : 준비중 <br/>
-PDF (45p) : https://www.miricanvas.com/v/13zq274 <br/>
-Download <br/>
 PDF : https://drive.google.com/file/d/11CnsBAK-ZvqyB-bf3c73GXYIN9MUZ1SJ/view?usp=drive_link <br/>
 er diagram : https://drive.google.com/file/d/1pkyKuoiNpd0uCI-sZpvU7cTXttRo8r0r/view?usp=drive_link <br/> 
 요구사항 정의서 : https://drive.google.com/file/d/15-VETOc3EE-phL5dZS0HYTIKwtCsMX1x/view?usp=drive_link <br/>
